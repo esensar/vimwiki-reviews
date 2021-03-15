@@ -15,7 +15,7 @@ endfunction
 
 " Convert days to seconds
 function! s:days_to_seconds(days)
-	return days * 24 * 60 * 60
+	return a:days * 24 * 60 * 60
 endfunction
 
 " Finds review template path for provided review type
