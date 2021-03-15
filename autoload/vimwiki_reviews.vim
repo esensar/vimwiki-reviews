@@ -3,7 +3,7 @@ function! s:get_reviews_dir(vimwiki_index)
 	if a:vimwiki_index == 0
 		let current_index = vimwiki#vars#get_bufferlocal('wiki_nr')
 		if l:current_index < 0
-			let l:current_index = 1
+			let l:current_index = 0
 		end
 		let l:vimwiki = g:vimwiki_list[current_index]
 	else
