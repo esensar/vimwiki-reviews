@@ -107,7 +107,7 @@ function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index, offset)
 	execute 'edit ' . l:file_name
 	if exists == v:false
 		call vimwiki_reviews#read_review_template_into_buffer(l:reviews_dir, 'month')
-		execute '%substitute/%date%/' . strftime('%Y %B', l:month_time)
+		execute '%substitute/%date%/' . strftime('%Y %B', l:month_date)
 	endif
 endfunction
 

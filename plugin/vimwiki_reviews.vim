@@ -33,7 +33,7 @@ nnoremap <Plug>VimwikiPrevMonthlyReview <Cmd>call vimwiki_reviews#open_vimwiki_m
 nnoremap <Plug>VimwikiMonthlyTemplate <Cmd>call vimwiki_reviews#open_review_monthly_template(v:count)<CR>
 nnoremap <Plug>VimwikiYearlyReview <Cmd>call vimwiki_reviews#open_vimwiki_yearly_review(v:count, 0)<CR>
 nnoremap <Plug>VimwikiNextYearlyReview <Cmd>call vimwiki_reviews#open_vimwiki_yearly_review(v:count, 1)<CR>
-nnoremap <Plug>VimwikiPReviousYearlyReview <Cmd>call vimwiki_reviews#open_vimwiki_yearly_review(v:count, -1)<CR>
+nnoremap <Plug>VimwikiPrevYearlyReview <Cmd>call vimwiki_reviews#open_vimwiki_yearly_review(v:count, -1)<CR>
 nnoremap <Plug>VimwikiYearlyTemplate <Cmd>call vimwiki_reviews#open_review_yearly_template(v:count)<CR>
 nnoremap <Plug>VimwikiReviewIndex <Cmd>call vimwiki_reviews#open_vimwiki_review_index(v:count)<CR>
 
