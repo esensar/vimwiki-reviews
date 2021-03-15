@@ -4,6 +4,11 @@
 "     DEPENDS ON VIMWIKI PLUGIN
 " -----------------------------------------------------------------------------
 
+if exists('g:loaded_vimwiki_reviews') || &compatible
+  finish
+endif
+let g:loaded_vimwiki_reviews = 1
+
 " Gets path to reviews dir of provided vimwiki (by index)
 function! s:GetReviewsDir(...)
 	if a:0 == 0
@@ -124,10 +129,20 @@ command! -nargs=? VimwikiYearlyReview :call s:VimwikiYearlyReview(<f-args>)
 command! -nargs=? VimwikiYearlyTemplate :call s:OpenReviewYearlyTemplate(<f-args>)
 command! -nargs=? VimwikiReviewIndex :call s:VimwikiReviewIndex(<f-args>)
 
-nnoremap <Leader>wrw :VimwikiWeeklyReview<CR>
-nnoremap <Leader>wrtw :VimwikiWeeklyTemplate<CR>
-nnoremap <Leader>wrm :VimwikiMonthlyReview<CR>
-nnoremap <Leader>wrtm :VimwikiMonthlyTemplate<CR>
-nnoremap <Leader>wry :VimwikiYearlyReview<CR>
-nnoremap <Leader>wrty :VimwikiYearlyTemplate<CR>
-nnoremap <Leader>wri :VimwikiReviewIndex<CR>
+nnoremap <Plug>VimwikiWeeklyReview :VimwikiWeeklyReview<CR>
+nnoremap <Plug>VimwikiWeeklyTemplate :VimwikiWeeklyTemplate<CR>
+nnoremap <Plug>VimwikiMonthlyReview :VimwikiMonthlyReview<CR>
+nnoremap <Plug>VimwikiMonthylTemplate :VimwikiMonthlyTemplate<CR>
+nnoremap <Plug>VimwikiYearlyReview :VimwikiYearlyReview<CR>
+nnoremap <Plug>VimwikiYearlyTemplate :VimwikiYearlyTemplate<CR>
+nnoremap <Plug>VimwikiReviewIndex :VimwikiReviewIndex<CR>
+
+if !exists('g:vimwiki_reviews_disable_maps') || !g:vimwiki_reviews_disable_maps
+	nnoremap <Leader>wrw :VimwikiWeeklyReview<CR>
+	nnoremap <Leader>wrtw :VimwikiWeeklyTemplate<CR>
+	nnoremap <Leader>wrm :VimwikiMonthlyReview<CR>
+	nnoremap <Leader>wrtm :VimwikiMonthlyTemplate<CR>
+	nnoremap <Leader>wry :VimwikiYearlyReview<CR>
+	nnoremap <Leader>wrty :VimwikiYearlyTemplate<CR>
+	nnoremap <Leader>wri :VimwikiReviewIndex<CR>
+endif
