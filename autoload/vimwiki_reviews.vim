@@ -62,11 +62,10 @@ endfunction
 
 " Open current week weekly review file
 " Created buffer is dated to Sunday of current week
-" Opens current week because Sunday is good time to do this review
-function! vimwiki_reviews#open_vimwiki_weekly_review(vimwiki_index)
+function! vimwiki_reviews#open_vimwiki_weekly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let days_to_sunday = 7 - str2nr(strftime('%u'))
-	let week_date = strftime('%Y-%m-%d', localtime() + l:days_to_sunday * 24 * 60 * 60)
+	let week_date = strftime('%Y-%m-%d', localtime() + l:days_to_sunday * 24 * 60 * 60 + 7 * offset)
 	let file_name = l:reviews_dir . l:week_date . '-week.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
@@ -81,11 +80,19 @@ endfunction
 " Created buffer is dated to previous month
 " Previous month is calculated in an erroneous way
 " 28 days are subtracted from current time to get previous month
-function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index)
+function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
-	let month_time = localtime() - 28 * 24 * 60 * 60
-	let month_date = strftime('%Y-%m', l:month_time)
-	let file_name = l:reviews_dir . l:month_date .'-month.md'
+	let month = str2nr(strftime('%m', localtime())) + a:offset
+	let year = str2nr(strftime('%Y', localtime()))
+	while l:month < 0
+		l:month += 12
+		l:year -= 1
+	endwhile
+	while l:month > 12
+		l:month -= 12
+		l:year += 1
+	endwhile
+	let file_name = l:reviews_dir . l:year . '-' . l:month .'-month.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
 	if exists == v:false
@@ -96,9 +103,9 @@ endfunction
 
 " Open past year yearly review file
 " Created buffer is dated to previous year
-function! vimwiki_reviews#open_vimwiki_yearly_review(vimwiki_index)
+function! vimwiki_reviews#open_vimwiki_yearly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
-	let year_date = (str2nr(strftime('%Y')) - 1)
+	let year_date = (str2nr(strftime('%Y')) + offset)
 	let file_name = l:reviews_dir . l:year_date .'-year.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
