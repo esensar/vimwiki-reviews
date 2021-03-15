@@ -16,7 +16,7 @@ Plugin adds new commands:
 - `VimwikiMonthlyReview`
 - `VimwikiYearlyReview`
 
-Bound to `<leader>wrw`, `<leader>wrm` and `<leader>wry` respectively.
+Bound to `<leader>wrww`, `<leader>wrmm` and `<leader>wryy` respectively.
 
 Additionally, it adds commands for editing template used for reviews:
 - `VimwikiWeeklyTemplate`
