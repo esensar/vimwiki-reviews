@@ -20,19 +20,19 @@ endfunction
 
 " Edits weekly review template
 function! vimwiki_reviews#open_review_weekly_template(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	execute 'edit ' . s:get_review_template_path(l:reviews_dir, 'week')
 endfunction
 
 " Edits monthly review template
 function! vimwiki_reviews#open_review_monthly_template(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	execute 'edit ' . s:get_review_template_path(l:reviews_dir, 'month')
 endfunction
 
 " Edits yearly review template
 function! vimwiki_reviews#open_review_yearly_template(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	execute 'edit ' . s:get_review_template_path(l:reviews_dir, 'year')
 endfunction
 
@@ -64,7 +64,7 @@ endfunction
 " Created buffer is dated to Sunday of current week
 " Opens current week because Sunday is good time to do this review
 function! vimwiki_reviews#open_vimwiki_weekly_review(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let days_to_sunday = 7 - str2nr(strftime('%u'))
 	let week_date = strftime('%Y-%m-%d', localtime() + l:days_to_sunday * 24 * 60 * 60)
 	let file_name = l:reviews_dir . l:week_date . '-week.md'
@@ -82,7 +82,7 @@ endfunction
 " Previous month is calculated in an erroneous way
 " 28 days are subtracted from current time to get previous month
 function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let month_time = localtime() - 28 * 24 * 60 * 60
 	let month_date = strftime('%Y-%m', l:month_time)
 	let file_name = l:reviews_dir . l:month_date .'-month.md'
@@ -97,7 +97,7 @@ endfunction
 " Open past year yearly review file
 " Created buffer is dated to previous year
 function! vimwiki_reviews#open_vimwiki_yearly_review(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let year_date = (str2nr(strftime('%Y')) - 1)
 	let file_name = l:reviews_dir . l:year_date .'-year.md'
 	let exists = filereadable(glob(l:file_name))
@@ -110,6 +110,6 @@ endfunction
 
 " Open reviews index file
 function! vimwiki_reviews#open_vimwiki_review_index(vimwiki_index)
-	let reviews_dir = call('s:get_reviews_dir', a:vimwiki_index)
+	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	execute 'edit ' . l:reviews_dir . 'reviews.md'
 endfunction
