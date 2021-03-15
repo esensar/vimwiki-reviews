@@ -70,7 +70,7 @@ endfunction
 function! vimwiki_reviews#open_vimwiki_weekly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let days_to_sunday = 7 - str2nr(strftime('%u'))
-	let week_date = strftime('%Y-%m-%d', localtime() + s:days_to_seconds(l:days_to_sunday) + s:days_to_seconds9(7 * a:offset))
+	let week_date = strftime('%Y-%m-%d', localtime() + s:days_to_seconds(l:days_to_sunday) + s:days_to_seconds(7 * a:offset))
 	let file_name = l:reviews_dir . l:week_date . '-week.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
@@ -90,7 +90,7 @@ function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index, offset)
 	let year = str2nr(strftime('%Y', l:time))
 	let month = str2nr(strftime('%m', l:time))
 
-	let l:month = l:month + offset
+	let l:month = l:month + a:offset
 	while l:month < 0
 		let l:month = l:month + 12
 		let l:year = l:year - 1
