@@ -13,6 +13,11 @@ function! s:get_reviews_dir(vimwiki_index)
 	return l:vimwiki.path . 'reviews/'
 endfunction
 
+" Convert days to seconds
+function! s:days_to_seconds(days)
+	return days * 24 * 60 * 60
+endfunction
+
 " Finds review template path for provided review type
 function! s:get_review_template_path(vimwiki_reviews_path, review_type)
 	return a:vimwiki_reviews_path . 'template-' . a:review_type . '.md'
@@ -65,7 +70,7 @@ endfunction
 function! vimwiki_reviews#open_vimwiki_weekly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
 	let days_to_sunday = 7 - str2nr(strftime('%u'))
-	let week_date = strftime('%Y-%m-%d', localtime() + l:days_to_sunday * 24 * 60 * 60 + 7 * offset)
+	let week_date = strftime('%Y-%m-%d', localtime() + s:days_to_seconds(l:days_to_sunday) + s:days_to_seconds9(7 * a:offset))
 	let file_name = l:reviews_dir . l:week_date . '-week.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
@@ -78,21 +83,26 @@ endfunction
 
 " Open past month monthly review file
 " Created buffer is dated to previous month
-" Previous month is calculated in an erroneous way
-" 28 days are subtracted from current time to get previous month
 function! vimwiki_reviews#open_vimwiki_monthly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
-	let month = str2nr(strftime('%m', localtime())) + a:offset
-	let year = str2nr(strftime('%Y', localtime()))
+	let time = localtime()
+
+	let year = str2nr(strftime('%Y', l:time))
+	let month = str2nr(strftime('%m', l:time))
+
+	let l:month = l:month + offset
 	while l:month < 0
-		l:month += 12
-		l:year -= 1
+		let l:month = l:month + 12
+		let l:year = l:year - 1
 	endwhile
 	while l:month > 12
-		l:month -= 12
-		l:year += 1
+		let l:month = l:month - 12
+		let l:year = l:year + 1
 	endwhile
-	let file_name = l:reviews_dir . l:year . '-' . l:month .'-month.md'
+
+	let month_date = strptime('%Y %m', l:year . ' ' . printf('%02d', l:month))
+
+	let file_name = l:reviews_dir . strftime('%Y-%m', l:month_date) .'-month.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
 	if exists == v:false
@@ -105,7 +115,7 @@ endfunction
 " Created buffer is dated to previous year
 function! vimwiki_reviews#open_vimwiki_yearly_review(vimwiki_index, offset)
 	let reviews_dir = s:get_reviews_dir(a:vimwiki_index)
-	let year_date = (str2nr(strftime('%Y')) + offset)
+	let year_date = (str2nr(strftime('%Y')) + a:offset)
 	let file_name = l:reviews_dir . l:year_date .'-year.md'
 	let exists = filereadable(glob(l:file_name))
 	execute 'edit ' . l:file_name
