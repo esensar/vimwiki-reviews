@@ -1,7 +1,7 @@
 # Vimwiki reviews
 
 Simple extension for [vimwiki](https://github.com/vimwiki/vimwiki) enabling weekly, monthly and yearly reviews.
-Check out [lua version](https://github.com/esensar/vimwiki-reviews-lua) for better maintaned version with more features, available for NeoVim only.
+Check out [lua version](https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua) for better maintaned version with more features, available for NeoVim only.
 
 **WORK IN PROGRESS!**
 
@@ -17,7 +17,7 @@ Using [Plug](https://github.com/junegunn/vim-plug)
 
 ```
 Plug 'vimwiki/vimwiki'
-Plug 'esensar/vimwiki-reviews-lua'
+Plug 'esensar/vimwiki-reviews'
 ```
 Then install via `:PlugInstall`
 

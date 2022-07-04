@@ -372,12 +372,12 @@ In this case only |vimwiki-reviews-functions| will be available.
 ISSUES                                                  *vimwiki-reviews-issues*
 
 If you experience issues using vimwiki-reviews, please report them at
-<https://github.com/esensar/vimwiki-reviews/issues>.
+<https://codeberg.org/vimwiki-reviews/vimwiki-reviews/issues>.
 
 CONTRIBUTING                                      *vimwiki-reviews-contributing*
 
 Feel free to look at already reported issues at
-<https://github.com/esensar/vimwiki-reviews/issues>.
+<https://codeberg.org/vimwiki-reviews/vimwiki-reviews/issues>.
 If available, check out CONTRIBUTING.md file in the repository.
 Feel free to create a new issue or pull request.
 
