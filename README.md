@@ -17,7 +17,7 @@ Using [Plug](https://github.com/junegunn/vim-plug)
 
 ```
 Plug 'vimwiki/vimwiki'
-Plug 'esensar/vimwiki-reviews'
+Plug 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews.git'
 ```
 Then install via `:PlugInstall`
 

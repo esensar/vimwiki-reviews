@@ -37,7 +37,7 @@ INSTALLATION                                      *vimwiki-reviews-installation*
 Add the following to your vimrc, or something sourced therein: >
 
   Plug 'vimwiki/vimwiki'
-  Plug 'esensar/vimwiki-reviews'
+  Plug 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews.git'
 <
 Then install via `:PlugInstall`
 
